@@ -152,30 +152,53 @@
 .bot-chat {
   width: 40%;
   background-color: #F7F5F4;
-  margin: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
   padding:10px;
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
-  align-items: center;
-  align-self: flex-start;  
+  align-items: center;  
 }
 .my-chat{
   width: 40%;
   background-color: #F7F5F4;
-  margin: 30px; 
+  margin-top: 20px;
+  margin-right: 10px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   align-self: flex-end;    
 }
 .message{
-  width: 80%;
+  /* width: 80%; */
   font-size: 15px;
   font-weight: 520;
   letter-spacing: 2px;
   line-height: 1.5;
   word-break: break-all;
+}
+.inform-message-div{
+  border: none;
+  display:flex;
+  flex-direction: column;
+  
+}
+.inform-message{
+  width: auto;
+  height: 40px;
+  background-color: #D5C8C1;
+  margin: 3px;
+  /* padding:10px; */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;  
+}
+#defaultMessageBtn1:active,
+#defaultMessageBtn2:active,
+#defaultMessageBtn3:active {
+  background-color: #c2ab9deb; /* 클릭 시 배경색 변경 */
 }
 
 /* 채팅입력 창 */
@@ -193,7 +216,7 @@
   background-color: #FBE5D9;
   border-radius: 5px;
   display: flex;  
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -204,12 +227,12 @@
 
 .input-userMsg {
   border: none;
-  background-color: transparent; /* 배경색을 투명하게 설정 */
-  border-bottom: 2px solid black; /* 아래 테두리만 표시 */
+  background-color: transparent; 
+  /* border-bottom: 2px solid black; */
   outline: none; /* 포커스 효과 제거 */
-  padding: 5px; /* 내부 여백 설정 */
-  font-size: 16px; /* 폰트 크기 설정 */
-  width: 80%; /* 너비 설정 */
+  padding: 5px;
+  font-size: 16px;
+  width: 80%;
 }
 
 .send-usrMsg-btn {
@@ -217,6 +240,6 @@
   border: none;
   cursor: pointer;
   position: relative;
-  left: 15px;
+  left: 5px;
 }
 

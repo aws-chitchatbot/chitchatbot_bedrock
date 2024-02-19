@@ -34,8 +34,7 @@
             <div class="chatroom-list" id="chatroomList">   
                 <div class="flex-box3">
                     <img class="chatroom-yong-icon" alt="" src="./resources/ccb_img/yong_icon.png"/>
-                    ChitChatBot
-                    
+                    ChitChatBot                    
                 </div>
             </div>   
 
@@ -49,17 +48,34 @@
             </div>
             
             <div class="chatting-div">
+                
                 <div class="bot-chat">
                     <img class="chat-icon" alt="" src="./resources/ccb_img/yong_icon.png" />
-                    <p class="message">안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 저의 ‘질문 메뉴’를 이용해 사용하는 방법을
-                        익혀보세요</p>                    
+                    <p class="message">안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 다음 질문들을 눌러 사용법을 알아보세요
+                    </p>      
                 </div>
-
-                <div class="my-chat">
+                <div class="bot-chat">
+                    <img class="chat-icon" alt="" src="./resources/ccb_img/yong_icon.png" />
+                        <div class="inform-message-div">
+                        <button class="inform-message" id="defaultMessageBtn1" onclick="insertData()">
+                            <p class="message">ChitChatBot은 어떤 서비스야?</p>
+                        </button>
+                        <button class="inform-message" id="defaultMessageBtn2" onclick="insertData()">
+                            <p class="message">단체톡방에 봇 추가하는 방법 알려줘</p>
+                        </button>
+                        <button class="inform-message" id="defaultMessageBtn3" onclick="insertData()">
+                            <p class="message">채팅방 추가는 어떻게 하는거야?</p>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 사용자 채팅 부분 -->
+                <!-- <div class="my-chat">
                     <img class="chat-icon" alt="" src="./resources/ccb_img/user_icon.png" />
                     <p class="message">안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 저의 ‘질문 메뉴’를 이용해 사용하는 방법을
                         익혀보세요</p>
-                </div>
+                </div> -->
+                
             </div>
     
             <div class="enterChat-div">
