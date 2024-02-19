@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./login_pop.html" />
+    <link rel="stylesheet" href="./addChatRoom_pop.html" />    
+  </head>
+
+  <body>
+
+    <div class="main-page">
+
+        <div class="left-bar">
+
+            <div class="flex-box1">
+              <img class="left-bar-user-icon" alt="" src="./resources/ccb_img/user_icon.png"/>
+              <button class="login-btn" id="loginBtn" onclick="location.href='http://127.0.0.1:5500/login_pop.html'">
+                로그인
+            </div>
+
+            <div class="flex-box2">
+                <div class="chatroom">채팅방 목록</div>
+                <button class="addchatroom-btn" id="addchatroomBtn">
+                    <!-- <button class="addchatroom-btn" id="addchatroomBtn" onclick="location.href='http://127.0.0.1:5500/addChatRoom_pop.html'">     -->
+                    <img class="addchatroom-img" alt="" src="./resources/ccb_img/addChatroom_icon.png"/>
+                </button>
+            </div>
+
+            <div class="chatroom-list" id="chatroomList">   
+                <div class="flex-box3">
+                    <img class="chatroom-yong-icon" alt="" src="./resources/ccb_img/yong_icon.png"/>
+                    ChitChatBot
+                    
+                </div>
+            </div>   
+
+        </div>
+
+
+        <div class="right-bar">
+            <div class="flex-box4">
+                <img class="chatroom-yong-icon" alt="" src="./resources/ccb_img/yong_icon.png"/> 
+                ChitChatBot
+            </div>
+            
+            <div class="chatting-div">
+                <div class="bot-chat">
+                    <img class="chat-icon" alt="" src="./resources/ccb_img/yong_icon.png" />
+                    <p class="message">안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 저의 ‘질문 메뉴’를 이용해 사용하는 방법을
+                        익혀보세요</p>                    
+                </div>
+
+                <div class="my-chat">
+                    <img class="chat-icon" alt="" src="./resources/ccb_img/user_icon.png" />
+                    <p class="message">안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 저의 ‘질문 메뉴’를 이용해 사용하는 방법을
+                        익혀보세요</p>
+                </div>
+            </div>
+    
+            <div class="enterChat-div">
+                <div class="flex-box5">
+                    <img class="pencil-icon" alt="" src="./resources/ccb_img/pencil_icon.png" />
+                    <input type="text" class="input-userMsg" id="inputUserMsg" placeholder="메세지를 입력해주세요">
+                    <button class="send-usrMsg-btn" id="sendUsrMsgBtn" onclick="insertData()">
+                        <img src="resources/ccb_img/send_message_icon.png" alt="Send Message" width="50" height="50" right="100">
+                    </button>
+                </div>
+                
+            </div>      
+        </div>
+
+        <div class="gray-line"></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+    
+  </body>
+</html>
