@@ -1,0 +1,159 @@
+<!-- -------------------------------------------------------- html -------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Popup</title>
+    <body>
+
+        <!-- 채팅방 추가 창 레이어 팝업으로 띄우기 -->
+        <div class="overlay" id="overlay"></div>
+        <div class="popup" id="popup">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <img
+              class="main-yong-icon"
+              alt=""
+              src="{{ url_for('static', filename='ccb_img/yong_icon.png') }}"
+            /> 
+            <h2>ChitChatBot</h2>
+            <form id="addChatroomForm">
+                <label for="username"></label>
+                <input type="text" id="pinNUm" name="pinNUm" required class='no-border' placeholder="PIN 번호를 입력해주세요"> 
+    
+                <label for="password"></label>
+                <input type="text" id="chatRoomName" name="chatRoomName" required class='no-border' placeholder="채팅방 이름을 설정해주세요">
+    
+                <button class="addChatroom-btn" onclick="addChatroom()">
+                    <img src="{{ url_for('static', filename='ccb_img/send_message_icon.png') }}" width="50" height="50" right="100">
+                </button>
+            </form>
+        </div>
+        
+</head>
+
+
+<!-- -------------------------------------------------------- css -------------------------------------------------------- -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* margin: 0; */
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 100vh;
+        }
+
+         /* 레이어 팝업 띄웠을 때 뒷배경 흐려지게 함 */
+        .overlay {                         
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* 팝업 */
+        .popup {               
+            /* display: none; */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 50px;
+            padding-right: 100px;
+            padding-left: 100px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* X모양 닫기 버튼 */
+        .close-btn {                    
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 30px;
+        }             
+
+        .main-yong-icon {
+            position: absolute;
+            top: 55px;
+            left: 40px;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;    
+        }
+
+        /* Pin, 채팅방 입력 후 전송 버튼 */
+        .addChatroom-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            top: 10px;
+            left: 250px;
+        }
+
+        .no-border {
+            border-width: 0;
+        }   
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+            /* margin-bottom: 16px; */
+            box-sizing: border-box;
+            background-color: #EAE8E7;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+    </style>
+
+
+
+    <!-- -------------------------------------------------------- javascript -------------------------------------------------------- -->
+    <script>
+        function openPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+            window.location.href = 'http://127.0.0.1:5500/again.html'
+        }
+
+        function addChatroom() {
+            // 새로운 div 요소 생성
+            var newDiv = document.createElement("div");
+            // "flex-box3" 클래스를 추가
+            newDiv.classList.add("flex-box3");
+            // 생성된 div에 텍스트 추가
+            var textNode = document.createTextNode("New Div");
+            newDiv.appendChild(textNode);
+            // 생성된 div를 chatroomList 요소의 자식으로 추가
+            document.getElementById("chatroomList").appendChild(newDiv);
+        }
+
+        function ClosePopupAndaddChatroom() {
+            closePopup(); // closePopup 함수 호출
+            addChatroom(); // addChatroom 함수 호출
+        }
+    </script>
+</body>
+</html>
