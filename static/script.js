@@ -47,6 +47,9 @@ document.getElementById("defaultMessageBtn1").addEventListener("click", function
 
     // .chatting-div 요소의 맨 아래에 새로운 채팅을 추가
     chattingDiv.appendChild(newChat);
+
+       var parentDiv = document.querySelector('.chatting-div');
+    parentDiv.scrollTop = parentDiv.scrollHeight;
 });
 // 두번째 기본 질문
 document.getElementById("defaultMessageBtn2").addEventListener("click", function() {
@@ -62,6 +65,9 @@ document.getElementById("defaultMessageBtn2").addEventListener("click", function
 
     // .chatting-div 요소의 맨 아래에 새로운 채팅을 추가
     chattingDiv.appendChild(newChat);
+
+       var parentDiv = document.querySelector('.chatting-div');
+    parentDiv.scrollTop = parentDiv.scrollHeight;
 });
 // 세번째 기본 질문
 document.getElementById("defaultMessageBtn3").addEventListener("click", function() {
@@ -77,26 +83,10 @@ document.getElementById("defaultMessageBtn3").addEventListener("click", function
 
     // .chatting-div 요소의 맨 아래에 새로운 채팅을 추가
     chattingDiv.appendChild(newChat);
+
+    var parentDiv = document.querySelector('.chatting-div');
+    parentDiv.scrollTop = parentDiv.scrollHeight;
 });
-// 네번째 기본 질문
-//document.getElementById("defaultMessageBtn4").addEventListener("click", function() {
-//    var chattingDiv = document.querySelector('.chatting-div');
-//
-//    // 새로운 채팅을 생성하고 아래 내용 추가
-//    var newChat = document.createElement('div');
-//    newChat.classList.add('bot-chat');
-//    newChat.innerHTML = `
-//        <img class="chat-icon" alt="" src="/static/ccb_img/yong_icon.png" />
-//        <p> 해당 채팅방의 텍스트 파일을 넣어주세요 </p>
-//    `;
-//
-//    // .chatting-div 요소의 맨 아래에 새로운 채팅을 추가
-//    chattingDiv.appendChild(newChat);
-//});
-
-
-
-
 
 
 

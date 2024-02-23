@@ -79,6 +79,11 @@
                     <img class="chat-icon" alt="" src="{{ url_for('static', filename='ccb_img/yong_icon.png') }}"/>
                     <p class="message">{{completion}}</p>
                 </div>
+
+                <div class="bot-chat">
+                    <img class="chat-icon" alt="" src="{{ url_for('static', filename='ccb_img/yong_icon.png') }}"/>
+                    <p class="message">{{answer}}</p>
+                </div>
                 
                 <!-- 사용자 채팅 부분 -->
                 <!-- <div class="my-chat">
@@ -90,13 +95,15 @@
             </div>
     
             <div class="enterChat-div">
+                <form action="{{ url_for('receive_message') }}" method="post" enctype=multipart/form-data>
                 <div class="flex-box5">
                     <img class="pencil-icon" alt="" src="{{ url_for('static', filename='ccb_img/pencil_icon.png') }}"/>
-                    <input type="text" class="input-userMsg" id="inputUserMsg" placeholder="메세지를 입력해주세요">
-                    <button class="send-usrMsg-btn" id="sendUsrMsgBtn" onclick="insertData()">
-                        <img src="{{ url_for('static', filename='ccb_img/send_message_icon.png') }}" alt="Send Message" width="50" height="50" right="100">
-                    </button>
+                        <input type="text" class="input-userMsg" name="message" id="inputUserMsg" placeholder="메세지를 입력해주세요">
+                        <button type="submit" class="send-usrMsg-btn" id="sendUsrMsgBtn" onclick="insertData()">
+                            <img src="{{ url_for('static', filename='ccb_img/send_message_icon.png') }}" alt="Send Message" width="50" height="50" right="100">
+                        </button>
                 </div>
+                </form>
             </div>      
         </div>
 

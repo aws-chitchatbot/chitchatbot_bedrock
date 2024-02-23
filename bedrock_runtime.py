@@ -273,8 +273,7 @@ class BedrockRuntimeWrapper:
             logger.error("Couldn't invoke Anthropic Claude v2")
             raise
 
-    # snippet-end:[python.example_code.bedrock-runtime.InvokeModelWithResponseStream]
-
+    # snippet-end:[python.example_code.bedrock-runtime.InvokeModelWithResponseStream
 
 def save_image(base64_image_data, model):
     output_dir = "output/" + model
@@ -350,7 +349,8 @@ async def invoke_with_response_stream(wrapper, model_id, prompt):
 
     print()
 
-def usage_demo(text_generation_prompt="지금 시간은?"):
+
+def usage_demo(textfile):
     """
     Demonstrates the invocation of various large-language and image generation models:
     Anthropic Claude 2, AI21 Labs Jurassic-2, and Stability.ai Stable Diffusion XL.
@@ -363,7 +363,7 @@ def usage_demo(text_generation_prompt="지금 시간은?"):
     client = boto3.client(service_name="bedrock-runtime", region_name="us-west-2")
 
     wrapper = BedrockRuntimeWrapper(client)
-
+    text_generation_prompt = "내가 카카오톡 채팅방 텍스트 파일을 보낼거야. 나는 앞으로 이 채팅 내용과 관련한 질문을 할건데, 네가 이 채팅방 파일을 받고 나서 나한테 '채팅파일을 잘 받았습니다. 궁금하신 내용을 질문해주세요' 라고 답변을 던져주었으면 좋겠어. 텍스트파일: " + textfile
     completion = invoke(wrapper, "anthropic.claude-v2", text_generation_prompt)
     return completion
 
@@ -372,6 +372,23 @@ def usage_demo(text_generation_prompt="지금 시간은?"):
     #         wrapper, "anthropic.claude-v2", text_generation_prompt
     #     )
     # )
+
+def usage_demo2(message):
+    """
+    Demonstrates the invocation of various large-language and image generation models:
+    Anthropic Claude 2, AI21 Labs Jurassic-2, and Stability.ai Stable Diffusion XL.
+    """
+    logging.basicConfig(level=logging.INFO)
+    print("-" * 88)
+    print("Welcome to the Amazon Bedrock Runtime demo.")
+    print("-" * 88)
+
+    client = boto3.client(service_name="bedrock-runtime", region_name="us-west-2")
+
+    wrapper = BedrockRuntimeWrapper(client)
+    text_generation_prompt = "요청내용: " + message + ", 답변은 무조건 한국어로 주길 바래"
+    completion = invoke(wrapper, "anthropic.claude-v2", text_generation_prompt)
+    return completion
 
 if __name__ == "__main__":
     usage_demo()
