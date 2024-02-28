@@ -19,9 +19,9 @@ export default function Navigation() {
                       className="flex items-center px-6 py-2 mt-4 text-gray-400 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                     <span className="mx-3">Foundation Models</span>
                 </Link> */}
-                <Link href="/chat"
+                <Link href="/"
                       className="flex items-center px-6 py-2 mt-4 text-gray-400 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                    <span className="mx-3">Chitchatbot</span>
+                    <span className="mx-3">Start New Chat</span>
                 </Link>
                 {/* <Link href="/text"
                       className="flex items-center px-6 py-2 mt-4 text-gray-400 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">

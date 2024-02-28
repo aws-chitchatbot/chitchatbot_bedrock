@@ -8,6 +8,58 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.inform-message{
+  width: auto;
+  height: 40px;
+  margin: 5px;
+  /* padding:10px; */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;  
+}
+
+.bg-made {
+  background-color: #e7e6e6;
+}
+
+/* Form 스타일링 */
+.fileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 내부 요소 간의 간격 */
+  width: 100%; /* 폼의 너비 */
+  max-width: 290px; /* 최대 너비 */
+  margin: auto; /* 중앙 정렬 */
+  padding: 10px; /* 내부 여백 */
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity)); /* 배경색 */
+}
+
+/* 파일 입력 필드 스타일링 */
+input[type="file"] {
+  border: 1px solid #ccc;
+  display: block;
+  width: 100%; /* 너비 */
+  padding: 8px; /* 패딩 */
+  border-radius: 4px; /* 테두리 둥글기 */
+  cursor: pointer; /* 커서 스타일 */
+}
+
+/* 제출 버튼 스타일링 */
+button[type="submit"] {
+  background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+  color: white; /* 글자색 */
+  padding: 10px 15px; /* 패딩 */
+  border: none; /* 테두리 없음 */
+  border-radius: 4px; /* 테두리 둥글기 */
+  cursor: pointer; /* 커서 스타일 */
+  transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+}
+
+button[type="submit"]:hover {
+  background-color: rgb(130 150 260 / var(--tw-bg-opacity)); /* 호버 시 배경색 */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

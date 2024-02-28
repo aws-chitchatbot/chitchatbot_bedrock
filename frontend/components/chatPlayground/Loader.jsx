@@ -9,7 +9,7 @@ export default function Loader() {
                 <div
                     className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
                 >
-                    Bot
+                    <img alt="" src="/yong_icon.png" width={"38px"} height={"35px"}></img>
                 </div>
                 <div className="relative ml-3 text-sm bg-white py-3 px-4 shadow rounded-xl rounded-br-xl">
                     <div role="status">

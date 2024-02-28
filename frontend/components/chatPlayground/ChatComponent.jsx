@@ -15,10 +15,16 @@ export default function ChatContainer() {
     const endpoint = "/foundation-models/model/chat/anthropic.claude-v2/invoke";
     const api = `${GlobalConfig.apiHost}:${GlobalConfig.apiPort}${endpoint}`;
 
+    // (start) 파일 입력 폼의 표시 여부 관리 상태
+    const [showFileInput, setShowFileInput] = useState(false);
+
+    const toggleFileInput = () => {
+        setShowFileInput(!showFileInput);
+    };
+
+
     // (start) 파일 입력에 대한 참조 생성
     const fileInputRef = useRef(null);
-
-    console.log("오리양ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ")
 
     // 파일 제출 처리
     const handleSubmit = async (event) => {
@@ -34,12 +40,47 @@ export default function ChatContainer() {
 
         reader.onload = (e) => {
             const fileContent = e.target.result;
-            console.log(fileContent); // 파일 내용 콘솔에 출력
+            sendFileContent(fileContent)
         };
 
         reader.readAsText(file); // 파일을 텍스트로 읽기
     };
     //(end)
+
+    const sendFileContent = async (fileContent) => {
+        const newMessage = { sender: "Human", message: fileContent };
+        setConversation(prevConversation => [...prevConversation, newMessage]);
+        setInputValue('');
+
+        try {
+            const message = "나는 앞으로 이 채팅대화 내용에 대해 너에게 질문할거야. 채팅대화 내용: " + fileContent
+            //extractPrompt([...conversation, newMessage]);
+            setIsLoading(true);
+
+            const response = await fetch(api, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: message })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const setAnswer = "채팅대화 파일을 받았습니다. 제가 대화 내용을 이해했으니 질문 해주세요.."
+            await response.json().then(data => {
+                setConversation(prevConversation => [...prevConversation, {
+                    sender: "Assistant",
+                    message: setAnswer //data.completion
+                }]);
+            });
+
+        } catch (error) {
+            console.error("Error sending message:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -99,43 +140,45 @@ export default function ChatContainer() {
                             <div
                                 className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
                             >
-                                Bot
+                                <img alt="" src="/yong_icon.png" width={"38px"} height={"35px"}></img>
                             </div>
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
                                 안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 다음 질문들을 눌러 사용법을 알아보세요
                             </div>
                         </div>
-                        <div className="flex flex-row items-center">
+                        <div className="flex flex-row items-center mb-4">
                             <div
                                 className="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
                             >
                             </div>
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
-                                <button className="inform-message rounded-xl bg-gray-200 px-3 py-3" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
                                     ChitChatBot은 어떤 서비스야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-3 py-3" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
                                     단체톡방에 봇 추가하는 방법 알려줘
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-3 py-3" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
                                     채팅방 추가는 어떻게 하는거야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-3 py-3" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={toggleFileInput}>
                                     채팅방 텍스트 파일 넣기
                                 </button>
                             </div>
                         </div>
-                        <div className="flex flex-row items-center">
+                        <div className="flex flex-row items-center mb-4">
                             <div
                                 className="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
                             >
                             </div>
-                            <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
-                                <form onSubmit={handleSubmit} encType="multipart/form-data">
-                                    <input type="file" id="textfile" name="textfile" accept=".txt" ref={fileInputRef} />
-                                    <button type="submit">확인</button>
-                                </form>
-                            </div>
+                            {showFileInput && (
+                                <div className="relative ml-3 text-sm bg-white py-2 px-2 shadow rounded-xl rounded-br-xl">
+                                    <form onSubmit={handleSubmit} className="fileForm" encType="multipart/form-data">
+                                        <input type="file" className="textfileInput" id="textfile" name="textfile" accept=".txt" ref={fileInputRef} />
+                                        <button className="submitBtn" type="submit">전송</button>
+                                    </form>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="grid grid-cols-12 gap-y-2">
