@@ -8,7 +8,6 @@ Welcome to the Python Foundation Model (FM) Playground, an example app to explor
 
 This repository includes a **FastAPI** application and a **Next.js** frontend, both executable locally. Below is a screenshot of the app in action.
 
-<img src="resources/screenshot.png" alt="Screenshot of the Python FM Playground" width="720" />
 
 ## ⚠ Important
 
