@@ -1,6 +1,7 @@
 "use client";
 
 import Human from "@/components/chatPlayground/Human";
+import Human2 from "@/components/chatPlayground/Human2";
 import React, { useRef, useState } from "react";
 import Assistant from "@/components/chatPlayground/Assistant";
 import Loader from "@/components/chatPlayground/Loader";
@@ -21,7 +22,6 @@ export default function ChatContainer() {
     const toggleFileInput = () => {
         setShowFileInput(!showFileInput);
     };
-
 
     // (start) 파일 입력에 대한 참조 생성
     const fileInputRef = useRef(null);
@@ -48,7 +48,7 @@ export default function ChatContainer() {
     //(end)
 
     const sendFileContent = async (fileContent) => {
-        const newMessage = { sender: "Human", message: fileContent };
+        const newMessage = { sender: "Human2", message: fileContent };
         setConversation(prevConversation => [...prevConversation, newMessage]);
         setInputValue('');
 
@@ -182,13 +182,22 @@ export default function ChatContainer() {
                         </div>
                     </div>
                     <div className="grid grid-cols-12 gap-y-2">
-                        {conversation.map((item, i) => item.sender === "Assistant" ? (
-                            <Assistant text={item.message} key={i} />
-                        ) : (
-                            <Human text={item.message} key={i} />
-                        ))}
+                        {conversation.map((item, i) => {
+                            if (item.sender === "Assistant") {
+                                return <Assistant text={item.message} key={i} />;
+                            } else if (item.sender === "Human") {
+                                return <Human text={item.message} key={i} />;
+                            } else if (item.sender === "Human2") {
+                                return <Human2 text={item.message} key={i} />;
+                            } else {
+                                // 조건에 해당하지 않는 경우는 렌더링하지 않음
+                                return null;
+                            }
+                        })}
                         {isLoading ? (<Loader />) : (<div></div>)}
                     </div>
+
+
                 </div>
             </div>
             <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
