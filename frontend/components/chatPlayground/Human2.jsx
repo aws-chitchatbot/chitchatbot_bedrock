@@ -1,5 +1,7 @@
 "use client";
 
+import ChatContainer from "@/components/chatPlayground/ChatComponent";
+
 export default function Human2({text}) {
     return (
         <div className="col-start-3 col-end-13 p-3 rounded-lg">

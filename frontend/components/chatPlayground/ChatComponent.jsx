@@ -16,18 +16,19 @@ export default function ChatContainer() {
     const endpoint = "/foundation-models/model/chat/anthropic.claude-v2/invoke";
     const api = `${GlobalConfig.apiHost}:${GlobalConfig.apiPort}${endpoint}`;
 
-    // (start) 파일 입력 폼의 표시 여부 관리 상태
+    // 파일 입력 폼의 표시 여부 관리 상태
     const [showFileInput, setShowFileInput] = useState(false);
 
     const toggleFileInput = () => {
         setShowFileInput(!showFileInput);
     };
 
-    // (start) 파일 입력에 대한 참조 생성
+    // 파일 입력에 대한 참조 생성
     const fileInputRef = useRef(null);
 
     // 파일 제출 처리
     const handleSubmit = async (event) => {
+        const filename = textfile
         event.preventDefault(); // 폼의 기본 제출 동작 방지
 
         if (!fileInputRef.current.files.length) {
@@ -161,7 +162,7 @@ export default function ChatContainer() {
                                 <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
                                     채팅방 추가는 어떻게 하는거야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={toggleFileInput}>
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick={toggleFileInput}>
                                     채팅방 텍스트 파일 넣기
                                 </button>
                             </div>
