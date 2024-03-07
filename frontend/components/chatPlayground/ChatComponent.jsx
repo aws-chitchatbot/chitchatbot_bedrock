@@ -2,7 +2,7 @@
 
 import Human from "@/components/chatPlayground/Human";
 import Human2 from "@/components/chatPlayground/Human2";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Assistant from "@/components/chatPlayground/Assistant";
 import Loader from "@/components/chatPlayground/Loader";
 import GlobalConfig from "@/app/app.config";
@@ -16,19 +16,24 @@ export default function ChatContainer() {
     const endpoint = "/foundation-models/model/chat/anthropic.claude-v2/invoke";
     const api = `${GlobalConfig.apiHost}:${GlobalConfig.apiPort}${endpoint}`;
 
-    // 파일 입력 폼의 표시 여부 관리 상태
+    const scrollRef = useRef();
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [conversation]);
+
+    // (start) 파일 입력 폼의 표시 여부 관리 상태
     const [showFileInput, setShowFileInput] = useState(false);
 
     const toggleFileInput = () => {
         setShowFileInput(!showFileInput);
     };
 
-    // 파일 입력에 대한 참조 생성
+    // (start) 파일 입력에 대한 참조 생성
     const fileInputRef = useRef(null);
 
     // 파일 제출 처리
     const handleSubmit = async (event) => {
-        const filename = textfile
         event.preventDefault(); // 폼의 기본 제출 동작 방지
 
         if (!fileInputRef.current.files.length) {
@@ -96,6 +101,29 @@ export default function ChatContainer() {
         return conversationBuilder.trim();
     }
 
+    // 기본 질문 클릭했을 때 답변 출력하기(insertData1,insertData2)
+    const insertData1 = () => {
+        setConversation(prevConversation => [
+            ...prevConversation,
+            {
+                sender: "Assistant",
+                message: <div>ChitChatBot은 카카오톡 채팅 대화내역에 AI 서비스를 탑재하여<br />
+                    질의응답을 통해 필요한 정보를 손쉽게 찾을 수 있는 서비스입니다.</div>
+            }
+        ]);
+    };
+
+    const insertData2 = () => {
+        setConversation(prevConversation => [
+            ...prevConversation,
+            {
+                sender: "Assistant",
+                message: <div> 질의응답을 하고 싶은 카카오톡 채팅방에 접속 후 "대화내용 내보내기" 기능을 통해 파일을 다운받고<br />
+                    <span className="font-semibold">"채팅방 텍스트 파일 넣기"</span> 버튼을 눌러 파일을 첨부해주세요.</div>
+            }
+        ]);
+    };
+
     const sendMessage = async () => {
         const newMessage = { sender: "Human", message: inputValue };
         setConversation(prevConversation => [...prevConversation, newMessage]);
@@ -131,9 +159,9 @@ export default function ChatContainer() {
     };
 
     return <div className="flex flex-col flex-auto h-full p-6">
-        <h3 className="text-3xl font-medium text-gray-700">Chitchatbot</h3>
+        <h3 className="text-3xl font-medium text-gray-700">ChitChatBot</h3>
         <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 p-4 mt-8">
-            <ModelIndicator modelName="Anthropic Claude 2" />
+            {/* <ModelIndicator modelName="Anthropic Claude 2" /> */}
             <div className="flex flex-col h-full overflow-x-auto mb-4">
                 <div className="flex flex-col h-full">
                     <div className="col-start-1 col-end-11 p-3 rounded-lg">
@@ -144,7 +172,7 @@ export default function ChatContainer() {
                                 <img alt="" src="/yong_icon.png" width={"38px"} height={"35px"}></img>
                             </div>
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
-                                안녕하세요. ChitChatBot입니다. 처음 서비스를 이용하신다면 다음 질문들을 눌러 사용법을 알아보세요
+                                안녕하세요 ChitChatBot입니다. 처음 서비스를 이용하신다면 다음 질문들을 눌러 사용법을 알아보세요.
                             </div>
                         </div>
                         <div className="flex flex-row items-center mb-4">
@@ -153,16 +181,13 @@ export default function ChatContainer() {
                             >
                             </div>
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={insertData1}>
                                     ChitChatBot은 어떤 서비스야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
-                                    단체톡방에 봇 추가하는 방법 알려줘
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={insertData2}>
+                                    대화내용 추가는 어떻게 하는거야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
-                                    채팅방 추가는 어떻게 하는거야?
-                                </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick={toggleFileInput}>
+                                <button className="inform-message rounded-xl bg-mint px-4 font-semibold" onClick={toggleFileInput}>
                                     채팅방 텍스트 파일 넣기
                                 </button>
                             </div>
@@ -196,11 +221,12 @@ export default function ChatContainer() {
                             }
                         })}
                         {isLoading ? (<Loader />) : (<div></div>)}
+                        <div ref={scrollRef} />
                     </div>
-
-
                 </div>
             </div>
+            
+            {/* 채팅보내는 창 전체 */}
             <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
                 <div className="flex-grow">
                     <div className="relative w-full">
