@@ -47,7 +47,7 @@ export default function Navigation() {
                         <h2 className="text-lg font-semibold mb-4">로그인</h2>
                         <form onSubmit={handleLogin} >
                             <div className="mb-4">
-                                <label htmlFor="username" className="block text-sm font-medium text-gray-700">사용자 이름</label>
+                                <label htmlFor="username" className="block text-sm font-medium text-gray-700">아이디</label>
                                 <input type="text" id="username" className="mt-1 p-2 border border-gray-300 rounded-md w-full" onChange={handleUsernameChange} />
                             </div>
                             <div className="mb-4">
