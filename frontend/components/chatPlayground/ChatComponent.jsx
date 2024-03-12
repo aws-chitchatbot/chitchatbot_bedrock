@@ -2,7 +2,7 @@
 
 import Human from "@/components/chatPlayground/Human";
 import Human2 from "@/components/chatPlayground/Human2";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Assistant from "@/components/chatPlayground/Assistant";
 import Loader from "@/components/chatPlayground/Loader";
 import GlobalConfig from "@/app/app.config";
@@ -16,19 +16,24 @@ export default function ChatContainer() {
     const endpoint = "/foundation-models/model/chat/anthropic.claude-v2/invoke";
     const api = `${GlobalConfig.apiHost}:${GlobalConfig.apiPort}${endpoint}`;
 
-    // 파일 입력 폼의 표시 여부 관리 상태
+    const scrollRef = useRef();
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [conversation]);
+
+    // (start) 파일 입력 폼의 표시 여부 관리 상태
     const [showFileInput, setShowFileInput] = useState(false);
 
     const toggleFileInput = () => {
         setShowFileInput(!showFileInput);
     };
 
-    // 파일 입력에 대한 참조 생성
+    // (start) 파일 입력에 대한 참조 생성
     const fileInputRef = useRef(null);
 
     // 파일 제출 처리
     const handleSubmit = async (event) => {
-        const filename = textfile
         event.preventDefault(); // 폼의 기본 제출 동작 방지
 
         if (!fileInputRef.current.files.length) {
@@ -153,16 +158,16 @@ export default function ChatContainer() {
                             >
                             </div>
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl rounded-br-xl">
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick="insertData()">
                                     ChitChatBot은 어떤 서비스야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick="insertData()">
                                     단체톡방에 봇 추가하는 방법 알려줘
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick="insertData()">
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick="insertData()">
                                     채팅방 추가는 어떻게 하는거야?
                                 </button>
-                                <button className="inform-message rounded-xl bg-gray-200 px-4" onclick={toggleFileInput}>
+                                <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={toggleFileInput}>
                                     채팅방 텍스트 파일 넣기
                                 </button>
                             </div>
@@ -196,6 +201,7 @@ export default function ChatContainer() {
                             }
                         })}
                         {isLoading ? (<Loader />) : (<div></div>)}
+                        <div ref={scrollRef} />
                     </div>
 
 
