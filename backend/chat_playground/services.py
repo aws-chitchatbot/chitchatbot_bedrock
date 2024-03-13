@@ -1,5 +1,8 @@
 import boto3
 import json
+from .models import User
+from passlib.hash import bcrypt
+from databases import Database
 
 bedrock_runtime = boto3.client(
     service_name="bedrock-runtime",
@@ -29,3 +32,12 @@ def invoke(prompt):
     response_body = json.loads(response.get("body").read())
 
     return response_body.get("completion")
+
+database = Database("mysql://chatbot:chatbot5@chatbot-database.cnemqs806to2.us-east-1.rds.amazonaws.com/chatbot_user")
+
+async def create_user(user: User):
+    query = "INSERT INTO users(usr_id, usr_pw) VALUES (:usr_id, :usr_pw)"
+    hashed_password = bcrypt.hash(user.password)
+    values = {"usr_id": user.username, "usr_pw": hashed_password}
+    await database.execute(query=query, values=values)
+    return {"username": user.username, "message": "User created successfully"}
