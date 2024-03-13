@@ -118,7 +118,7 @@ export default function ChatContainer() {
             ...prevConversation,
             {
                 sender: "Assistant",
-                message: <div> 질의응답을 하고 싶은 카카오톡 채팅방에 접속 후 "대화내용 내보내기" 기능을 통해 파일을 다운받고<br />
+                message: <div> 질의응답을 하고 싶은 카카오톡 채팅방에 접속 후 "대화 내보내기" 기능을 통해 파일을 다운받고<br />
                     <span className="font-semibold">"채팅방 텍스트 파일 넣기"</span> 버튼을 눌러 파일을 첨부해주세요.</div>
             }
         ]);
@@ -157,6 +157,29 @@ export default function ChatContainer() {
             setIsLoading(false);
         }
     };
+
+    const toggleMenu = () => {
+        setConversation(prevConversation => [
+            ...prevConversation,
+            {
+                sender: "Assistant",
+                message: <div>
+                    <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={insertData1}>
+                        ChitChatBot은 어떤 서비스야?
+                    </button>
+                    <button className="inform-message rounded-xl bg-gray-200 px-4" onClick={insertData2}>
+                        대화내용 추가는 어떻게 하는거야?
+                    </button>
+                    <button className="inform-message rounded-xl bg-mint px-4 font-semibold" onClick={toggleFileInput}>
+                        채팅방 텍스트 파일 넣기
+                    </button>
+                </div>
+
+            }
+        ]);
+    };
+
+
 
     return <div className="flex flex-col flex-auto h-full p-6">
         <h3 className="text-3xl font-medium text-gray-700">ChitChatBot</h3>
@@ -225,11 +248,11 @@ export default function ChatContainer() {
                     </div>
                 </div>
             </div>
-            
+
             {/* 채팅보내는 창 전체 */}
             <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
                 <div className="flex-grow">
-                    <div className="relative w-full">
+                    <div className="relative w-99">
                         <input
                             type="text"
                             value={inputValue}
@@ -244,6 +267,13 @@ export default function ChatContainer() {
                         />
                     </div>
                 </div>
+                <div classname="m1-4">
+                    <button type="button" onClick={toggleMenu} className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
+                    >
+                        <span>Q&A</span>
+                    </button>
+                </div>
+
                 <div className="ml-4">
                     <button
                         type="button"
@@ -269,6 +299,7 @@ export default function ChatContainer() {
                         </span>
                     </button>
                 </div>
+
             </div>
         </div>
     </div>;
